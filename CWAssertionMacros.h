@@ -31,6 +31,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/**
+ If expression is evaluated to NO then it logs the failure & calls abort()
+ 
+ If the passed in expression evaluates to false then this macro simply logs the
+ important details such as the expression, the function/method that this
+ happened in, the file and the line #. Then it calls abort(). This is meant to
+ be a lighter weight alternative to NSAssert() and its assertion handling 
+ mechanisms.
+ 
+ @param expression The expression to be evaluated
+ */
 #define CWAssert(expression, ...) \
 do { \
 	if(!(expression)) { \
@@ -39,6 +50,18 @@ do { \
 	} \
 } while(0)
 
+/**
+ If expression is evaluated to NO then it logs the failure & calls abort()
+ 
+ If the passed in expression evaluates to false then this macro simply logs the
+ important details such as the expression, the function/method that this
+ happened in, the file and the line #. Additionally this also calls 
+ [NSThread callStackSymbols] before calling abort(). This is meant to
+ be a lighter weight alternative to NSAssert() and its assertion handling
+ mechanisms.
+ 
+ @param expression The expression to be evaluated
+ */
 #define CWAssertST(expression, ...) \
 do { \
 	if(!(expression)) { \
